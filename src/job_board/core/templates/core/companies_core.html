@@ -1,0 +1,25 @@
+{% extends 'core/base_core.html' %}
+
+{% block content %}
+<br><br><br>
+<h1>Companies</h1>
+<style>
+    table, th, td {
+      border-style:solid;
+      border-color: #07df2b79;
+    }
+</style>
+<table>
+    <tr>
+        <th>company name</th>
+        <th>job openings</th>
+    </tr>
+        {% for c in count %}
+    <tr>
+        <td>{{ c.company }}</td>
+        <td>{{ c.count_vacancy }}</td>
+        {% endfor %}
+    </tr>
+</table>
+
+{% endblock content %}
