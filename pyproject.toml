@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "job-board"
+version = "0.1.0"
+description = ""
+authors = ["YauheniRoshchanka <roshchenkoevgen@gmail.com>"]
+readme = "README.md"
+packages = [{include = "job_board"}]
+
+[tool.poetry.dependencies]
+python = "3.11.4"
+django = "4.2.2"
+dacite = "^1.8.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
