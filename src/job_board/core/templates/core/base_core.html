@@ -7,9 +7,11 @@
     </head>
     <body>
         {% block mainmanu %}
+        <nav>
         <a href='{% url "index" %}'>Job Board</a>
         <a href='{% url "add_core" %}'>Add Vacancies</a>
         <a href='{% url "companies_core" %}'>Companies</a>
+        </nav>
         {% endblock mainmanu %}
 
         {% block content %}
