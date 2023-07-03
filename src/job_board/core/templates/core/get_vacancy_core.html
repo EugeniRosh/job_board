@@ -1,0 +1,53 @@
+{% extends 'core/base_core.html' %}
+
+{% block content %}
+<h2>Vacancies</h2>
+<style>
+    table, th, td {
+      border-style:solid;
+      border-color: #96D4D4;
+    }
+</style>
+<table>
+    <tr>
+        <th>job title</th>
+        <th>company name</th>
+        <th>skill level</th>
+        <th>minimal experience</th>
+        <th>salary</th>
+    </tr>
+    <tr>
+        <td>{{ vacancy.title }}</td>
+        <td>{{ vacancy.company }}</td>
+        <td>{{ vacancy.competence}}</td>
+        <td>{{ vacancy.experience }}</td>
+        <td>{{ vacancy.min_salary }} - {{ vacancy.max_salary }}</td>
+    </tr>
+</table>
+<a href="{% url 'add_vacancy_apply_core'  vacancy.vacancy_id %}">Add apply</a>
+<h2>Apply</h2>
+<style>
+    table, th, td {
+      border-style:solid;
+      border-color: #050707;
+    }
+</style>
+<table>
+    <tr>
+        <th>User name</th>
+        <th>Accompanying text</th>
+        <th>Resume</th>
+        <th>Phone</th>
+        <th>Feedback status</th>
+    </tr>
+        {% for f in feedback %}
+    <tr>
+        <td>{{ f.user}}</a></td>
+        <td>{{ f.accompanying_text }}</td>
+        <td>{{ f.resume }}</td>
+        <td>{{ f.user_phone }}</td>
+        <td>{{ f.status }}</td>
+        {% endfor %}
+    </tr>
+</table>
+{% endblock content %}
