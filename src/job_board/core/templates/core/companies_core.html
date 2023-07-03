@@ -14,9 +14,9 @@
         <th>company name</th>
         <th>job openings</th>
     </tr>
-        {% for c in count %}
+        {% for c in company_list %}
     <tr>
-        <td>{{ c.company }}</td>
+        <td><a href="{% url 'get_company_core' c.company_id %}">{{ c.name }}</a></td>
         <td>{{ c.count_vacancy }}</td>
         {% endfor %}
     </tr>
