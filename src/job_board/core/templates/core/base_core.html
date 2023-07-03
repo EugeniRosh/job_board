@@ -3,13 +3,16 @@
     <head>
         <h1>Job Board</h1>
         <meta charset="UTF-8">
-        <title>{{title}}</title>
+        <title>{{ title }}</title>
     </head>
     <body>
         {% block mainmanu %}
         <a href='{% url "index" %}'>Job Board</a>
-        <a href='{% url "add_core" %}'>Add Vacancies</a>
+        <a href='{% url "add_vacancy_core" %}'>Add Vacancies</a>
         <a href='{% url "companies_core" %}'>Companies</a>
+        <a href='{% url "add_company_core" %}'>Add Company</a>
+        <a href='{% url "profile_core" %}'>Users</a>
+        <a href='{% url "add_profile_core" %}'>Add Users</a>
         {% endblock mainmanu %}
 
         {% block content %}
