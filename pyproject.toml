@@ -12,6 +12,7 @@ django = "4.2.2"
 dacite = "1.8.1"
 python-dotenv = "1.0.0"
 
+
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.4.0"
 flake8 = "6.0.0"

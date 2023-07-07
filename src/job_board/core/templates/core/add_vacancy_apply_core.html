@@ -1,0 +1,12 @@
+{% extends 'core/base_core.html' %}
+
+{% block content %}
+<br><br>
+<h1>Add response to job</h1>
+<br>
+<form action="{{ add_vacancy_apply_core }}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+{% endblock content %}

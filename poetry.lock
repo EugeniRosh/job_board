@@ -410,6 +410,7 @@ files = [
 ]
 
 [[package]]
+
 name = "python-dotenv"
 version = "1.0.0"
 description = "Read key-value pairs from a .env file and set them as environment variables"
@@ -424,6 +425,7 @@ files = [
 cli = ["click (>=5.0)"]
 
 [[package]]
+
 name = "pyyaml"
 version = "6.0"
 description = "YAML parser and emitter for Python"
@@ -549,4 +551,6 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = "3.11.4"
+
 content-hash = "2f7612952a9b44a24978549a941c4034abf876a61d09f7d9e369e49168c2ff41"
+

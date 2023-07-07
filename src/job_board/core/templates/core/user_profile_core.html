@@ -1,0 +1,43 @@
+{% extends 'core/base_core.html' %}
+
+{% block content %}
+<h1>Users</h1>
+<style>
+    table, th, td {
+      border-style:solid;
+      border-color: #000000;
+    }
+</style>
+<table>
+    <tr>
+        <th>photo</th>
+        <th>name</th>
+        <th>surname</th>
+        <th>age</th>
+        <th>experience description</th>
+        <th>resume</th>
+        <th>work experience</th>
+        <th>status</th>
+        <th>design format</th>
+        <th>competence</th>
+        <th>work_format</th>
+        <th>salary</th>
+    </tr>
+    <tr>
+        {% for u in users %}
+        <td>{{ u.photo }}</td>
+        <td>{{ u.name }}</td>
+        <td>{{ u.surname }}</td>
+        <td>{{ u.age }}</td>
+        <td>{{ u.experience_description }}</td>
+        <td>{{ u.resume }}</td>
+        <td>{{ u.work_experience }}</td>
+        <td>{{ u.status }}</td>
+        <td>{{ u.design_format }}</td>
+        <td>{{ u.competence }}</td>
+        <td>{{ u.work_format }}</td>
+        <td>{{ u.min_salary }} - {{ u.max_salary }}</td>
+        {% endfor %}
+    </tr>
+</table>
+{% endblock content %}
