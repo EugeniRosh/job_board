@@ -2,14 +2,22 @@ from django.core import validators
 from django.db import models
 
 
-class Skills(models.Model):
+class BaseModel(models.Model):
+    created_at = models.DateField(auto_now_add=True)
+    update_at = models.DateField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
+class Skills(BaseModel):
     skill = models.CharField(max_length=50, unique=True)
 
     class Meta:
         db_table = "skills"
 
 
-class Languages(models.Model):
+class Languages(BaseModel):
     title = models.CharField(max_length=50, unique=True)
     skill = models.ManyToManyField(to="Skills", through="LanguageSkills")
 
@@ -17,7 +25,7 @@ class Languages(models.Model):
         db_table = "languages"
 
 
-class LanguageSkills(models.Model):
+class LanguageSkills(BaseModel):
     language = models.ForeignKey(
         to="Languages", related_name="languages", on_delete=models.CASCADE
     )
@@ -34,75 +42,63 @@ class LanguageSkills(models.Model):
         ]
 
 
-class UserStatuses(models.Model):
+class UserStatuses(BaseModel):
     status = models.CharField(max_length=40, unique=True)
 
     class Meta:
         db_table = "user_statuses"
 
 
-class WorkFormats(models.Model):
+class WorkFormats(BaseModel):
     work_format = models.CharField(max_length=50, unique=True)
 
     class Meta:
         db_table = "work_formats"
 
 
-class Competencies(models.Model):
+class Competencies(BaseModel):
     competence = models.CharField(max_length=30, unique=True)
 
     class Meta:
         db_table = "competencies"
 
 
-class EmploymentFormats(models.Model):
+class EmploymentFormats(BaseModel):
     employment_format = models.CharField(max_length=30, unique=True)
 
     class Meta:
         db_table = "employment_formats"
 
 
-class Salary(models.Model):
-    salary_min = models.IntegerField(
-        validators=[validators.MinValueValidator(limit_value=0)]
-    )
-    salary_max = models.IntegerField(
-        validators=[validators.MinValueValidator(limit_value=0)]
-    )
-
-    class Meta:
-        db_table = "salary"
-
-
-class Tags(models.Model):
+class Tags(BaseModel):
     tag = models.CharField(max_length=15, unique=True)
 
     class Meta:
         db_table = "tags"
 
 
-class Countries(models.Model):
+class Countries(BaseModel):
     country = models.CharField(max_length=60, unique=True)
 
     class Meta:
         db_table = "countries"
 
 
-class Cities(models.Model):
+class Cities(BaseModel):
     city = models.CharField(max_length=50, unique=True)
 
     class Meta:
         db_table = "cities"
 
 
-class Genders(models.Model):
+class Genders(BaseModel):
     gender = models.CharField(max_length=20, unique=True)
 
     class Meta:
         db_table = "genders"
 
 
-class Profiles(models.Model):
+class Profiles(BaseModel):
     email = models.EmailField()
     phone = models.CharField(max_length=20)
     linkedin = models.CharField(max_length=150, blank=True)
@@ -123,7 +119,7 @@ class Profiles(models.Model):
         db_table = "profiles"
 
 
-class Users(models.Model):
+class Users(BaseModel):
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     age = models.SmallIntegerField(
@@ -150,20 +146,25 @@ class Users(models.Model):
     status = models.ForeignKey(
         to="UserStatuses", related_name="users", on_delete=models.CASCADE
     )
-    salary_id = models.ForeignKey(
-        to="Salary", related_name="users", on_delete=models.CASCADE
+    salary_min = models.IntegerField(
+        validators=[validators.MinValueValidator(limit_value=0)]
     )
-    language = models.ManyToManyField(to="Languages", through="UsersLanguageSkills")
+    salary_max = models.IntegerField(
+        validators=[validators.MinValueValidator(limit_value=0)]
+    )
+    language = models.ManyToManyField(
+        to="LanguageSkills", through="UsersLanguageSkills"
+    )
     tag = models.ManyToManyField(to="Tags", through="UsersTags")
 
     class Meta:
         db_table = "users"
 
 
-class UsersLanguageSkills(models.Model):
+class UsersLanguageSkills(BaseModel):
     user = models.ForeignKey(to="Users", related_name="users", on_delete=models.CASCADE)
     language = models.ForeignKey(
-        to="Languages", related_name="LanguageSkills", on_delete=models.CASCADE
+        to="LanguageSkills", related_name="LanguageSkills", on_delete=models.CASCADE
     )
 
     class Meta:
@@ -175,12 +176,9 @@ class UsersLanguageSkills(models.Model):
         ]
 
 
-class UsersTags(models.Model):
+class UsersTags(BaseModel):
     user = models.ForeignKey(to="Users", related_name="Users", on_delete=models.CASCADE)
     tag = models.ForeignKey(to="Tags", related_name="Tags", on_delete=models.CASCADE)
-    companies = models.ForeignKey(
-        to="Companies", related_name="company", on_delete=models.CASCADE
-    )
 
     class Meta:
         db_table = "users_tags"
@@ -189,7 +187,7 @@ class UsersTags(models.Model):
         ]
 
 
-class Addresses(models.Model):
+class Addresses(BaseModel):
     country = models.ForeignKey(
         to="Countries", related_name="addresses", on_delete=models.CASCADE
     )
@@ -208,7 +206,7 @@ class Addresses(models.Model):
         db_table = "addresses"
 
 
-class StaffNumber(models.Model):
+class StaffNumber(BaseModel):
     min_staff = models.IntegerField(
         validators=[validators.MinValueValidator(limit_value=1)]
     )
@@ -220,7 +218,7 @@ class StaffNumber(models.Model):
         db_table = "staff_number"
 
 
-class Companies(models.Model):
+class Companies(BaseModel):
     name = models.CharField(max_length=100, unique=True)
     address = models.OneToOneField(
         to="Addresses", related_name="companies", on_delete=models.CASCADE
@@ -245,14 +243,14 @@ class Companies(models.Model):
         db_table = "companies"
 
 
-class BusinessLines(models.Model):
+class BusinessLines(BaseModel):
     business_line = models.CharField(max_length=50)
 
     class Meta:
         db_table = "business_lines"
 
 
-class CompaniesBusinessLines(models.Model):
+class CompaniesBusinessLines(BaseModel):
     company = models.ForeignKey(
         to="Companies", related_name="companies", on_delete=models.CASCADE
     )
@@ -270,14 +268,14 @@ class CompaniesBusinessLines(models.Model):
         ]
 
 
-class Positions(models.Model):
+class Positions(BaseModel):
     title = models.CharField(max_length=30)
 
     class Meta:
         db_table = "positions"
 
 
-class Employees(models.Model):
+class Employees(BaseModel):
     name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
     country = models.ForeignKey(
@@ -299,7 +297,7 @@ class Employees(models.Model):
         db_table = "employees"
 
 
-class EmployeesPositions(models.Model):
+class EmployeesPositions(BaseModel):
     employee = models.ForeignKey(
         to="Employees", related_name="employees", on_delete=models.CASCADE
     )
@@ -316,7 +314,7 @@ class EmployeesPositions(models.Model):
         ]
 
 
-class Reviews(models.Model):
+class Reviews(BaseModel):
     user = models.ForeignKey(
         to="Users", related_name="reviews", on_delete=models.CASCADE
     )
@@ -324,8 +322,6 @@ class Reviews(models.Model):
         to="Companies", related_name="reviews", on_delete=models.CASCADE
     )
     review = models.TextField(max_length=800)
-    created_at = models.DateField(auto_now_add=True)
-    update_at = models.DateField(auto_now=True)
     likes = models.IntegerField(
         default=0, validators=[validators.MinValueValidator(limit_value=0)]
     )
@@ -337,7 +333,7 @@ class Reviews(models.Model):
         db_table = "reviews"
 
 
-class Vacancy(models.Model):
+class Vacancy(BaseModel):
     title = models.CharField(max_length=100)
     description = models.TextField()
     employee = models.ForeignKey(
@@ -352,8 +348,11 @@ class Vacancy(models.Model):
     employment_formats = models.ForeignKey(
         to="EmploymentFormats", related_name="vacancy", on_delete=models.CASCADE
     )
-    salary = models.ForeignKey(
-        to="Salary", related_name="vacancy", on_delete=models.CASCADE
+    salary_min = models.IntegerField(
+        validators=[validators.MinValueValidator(limit_value=0)]
+    )
+    salary_max = models.IntegerField(
+        validators=[validators.MinValueValidator(limit_value=0)]
     )
     tag = models.ManyToManyField(to="Tags", through="VacancyTags")
     country = models.ManyToManyField(to="Countries", through="VacancyCounties")
@@ -362,7 +361,7 @@ class Vacancy(models.Model):
         db_table = "vacancy"
 
 
-class VacancyTags(models.Model):
+class VacancyTags(BaseModel):
     vacancy = models.ForeignKey(
         to="Vacancy", related_name="vacancies", on_delete=models.CASCADE
     )
@@ -377,7 +376,7 @@ class VacancyTags(models.Model):
         ]
 
 
-class VacancyCounties(models.Model):
+class VacancyCounties(BaseModel):
     vacancy = models.ForeignKey(
         to="Vacancy", related_name="vacancy", on_delete=models.CASCADE
     )
@@ -394,14 +393,14 @@ class VacancyCounties(models.Model):
         ]
 
 
-class ResponseStatuses(models.Model):
+class ResponseStatuses(BaseModel):
     status = models.CharField(max_length=30)
 
     class Meta:
         db_table = "response_statuses"
 
 
-class Responses(models.Model):
+class Responses(BaseModel):
     user = models.ForeignKey(
         to="Users", related_name="responses", on_delete=models.CASCADE
     )
