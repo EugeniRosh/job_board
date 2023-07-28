@@ -11,7 +11,7 @@ class Responses(BaseModel):
         to="Vacancy", related_name="responses", on_delete=models.CASCADE
     )
     accompanying_text = models.TextField(max_length=500)
-    resume = models.CharField(max_length=150)  # delete
+    resume = models.CharField(max_length=150)
     status = models.ForeignKey(
         to="ResponseStatuses", related_name="responses", on_delete=models.CASCADE
     )
