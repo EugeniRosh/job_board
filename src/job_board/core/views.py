@@ -2,17 +2,14 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from django.shortcuts import render
-from django.views.decorators.http import require_http_methods
-
-from .forms import (
+from core.forms import (
     CompanyForm,
     CompanyReviewForm,
-    JobResponseForm,
     UserForm,
     VacancyForm,
+    VacancyResponseForm,
 )
-from .storage import (
+from core.storage import (
     CompanyDTO,
     CompanyReviewDTO,
     JobResponseDTO,
@@ -24,6 +21,8 @@ from .storage import (
     users_storage,
     vacancies_storage,
 )
+from django.shortcuts import render
+from django.views.decorators.http import require_http_methods
 
 if TYPE_CHECKING:
     from django.core.handlers.wsgi import WSGIRequest
@@ -112,13 +111,13 @@ def add_vacancy_apply_core_controller(
     request: WSGIRequest, vacancy_id: int
 ) -> HttpResponse:
     if request.POST:
-        vacancy_form = JobResponseForm(data=request.POST)
+        vacancy_form = VacancyResponseForm(data=request.POST)
         if vacancy_form.is_valid():
             job_response = from_dict(JobResponseDTO, vacancy_form.cleaned_data)
             job_response.vacancy_id = vacancy_id
             job_response_storage.add_response(response=job_response)
 
-    form = JobResponseForm()
+    form = VacancyResponseForm()
     context = {"title": "Add apply to job", "form": form}
     return render(request, "core/add_vacancy_apply_core.html", context=context)
 
