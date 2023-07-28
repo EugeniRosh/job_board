@@ -89,7 +89,6 @@ WSGI_APPLICATION = 'job_board.wsgi.application'
     }
 }"""
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
