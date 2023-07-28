@@ -1,0 +1,6 @@
+class CreateUniqueError(Exception):
+    ...
+
+
+class ValueNotExists(Exception):
+    ...
