@@ -16,8 +16,8 @@
     </tr>
         {% for c in company_list %}
     <tr>
-        <td><a href="{% url 'get_company_core' c.company_id %}">{{ c.name }}</a></td>
-        <td>{{ c.count_vacancy }}</td>
+        <td><a href="{% url 'get_company_core' c.id %}">{{ c.name }}</a></td>
+        <td>{{ c.count_vacancies }}</td>
         {% endfor %}
     </tr>
 </table>

@@ -2,9 +2,10 @@
 
 {% block content %}
 <br><br>
-<h1>Add Company form</h1>
+<h1>Post a job</h1>
 <br>
-<form action="{{ add_company_core }}" method="post">
+<form action="{{ add_profile_core }}" method="post" enctype="multipart/form-data">
+
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Submit</button>

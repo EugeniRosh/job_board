@@ -2,6 +2,11 @@
 
 {% block content %}
 <h1>Vacancies</h1>
+<form method="GET" action=" {% url 'index' %} ">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" id="submit">
+</form>
 <style>
     table, th, td {
       border-style:solid;
@@ -18,11 +23,11 @@
     </tr>
         {% for v in vacancies %}
     <tr>
-        <td><a href="{% url 'get_vacancy_core' v.vacancy_id %}">{{ v.title }}</a></td>
-        <td>{{ v.company }}</td>
-        <td>{{ v.competence}}</td>
-        <td>{{ v.experience }}</td>
-        <td>{{ v.min_salary }} - {{ v.max_salary }}</td>
+        <td><a href="{% url 'get_vacancy_core' v.id %}">{{ v.title }}</a></td>
+        <td>{{ v.employee__company__name }}</td>
+        <td>{{ v.competence__competence}}</td>
+        <td> "add exp" + year</td>
+        <td>{{ v.salary_min }} - {{ v.salary_max }}</td>
         {% endfor %}
     </tr>
 </table>

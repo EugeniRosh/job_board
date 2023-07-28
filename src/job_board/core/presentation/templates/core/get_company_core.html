@@ -1,0 +1,54 @@
+{% extends 'core/base_core.html' %}
+
+{% block content %}
+<h2>Companies</h2>
+    <img src="{{  company.logo.url  }}">
+    <p>Company name: {{ company.name }}</p>
+    <p>Founding year: {{ company.founding_year }}</p>
+    <p>Description: {{ company.description }}</p>
+    <p>Email: {{ company.email }}</p>
+    <p>Phone: {{ company.phone }}</p>
+    Business lines:
+    <p>
+        {% for i in business_lines %}
+            -- {{ i.business_line }}
+        {% endfor %}
+    </p>
+    <p>Linkedin: {{ company.linkedin }}</p>
+    <p>Instagram: {{ company.instagram }}</p>
+    <p>Web_site: {{ company.web_site }}</p>
+    <p>Twitter: {{ company.twitter }}</p>
+    <p>Staff: {{ company.staff_number.min_staff }} - {{ company.staff_number.max_staff }}</p>
+    <p>Country: {{ company.address.country.country }}</p>
+    <p>City: {{ company.address.city.city }}</p>
+    <p>Street: {{ company.address.street }}</p>
+    <p>House number: {{ company.address.house_number }}</p>
+    <p>Office number: {{ company.address.office_number }}</p>
+
+<a href="{% url 'add_review_company_core'  company.id %}">Add review</a>
+<a href="{% url 'add_employee_core' company.id %}">Add employees</a>
+<a href="{% url 'employees_company_core' company.name %}">Employees</a>
+<h2>Review</h2>
+<style>
+    table, th, td {
+      border-style:solid;
+      border-color: #00ffff;
+    }
+</style>
+<table>
+    <tr>
+        <th>User name</th>
+        <th>Review</th>
+        <th>Likes</th>
+        <th>Dislikes</th>
+    </tr>
+        {% for f in feedback %}
+    <tr>
+        <td>{{ f.user}}</a></td>
+        <td>{{ f.review }}</td>
+        <td>{{ f.likes }}</td>
+        <td>{{ f.dislikes }}</td>
+        {% endfor %}
+    </tr>
+</table>
+{% endblock content %}

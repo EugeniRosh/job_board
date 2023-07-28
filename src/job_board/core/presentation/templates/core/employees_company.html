@@ -1,0 +1,33 @@
+{% extends 'core/base_core.html' %}
+
+{% block content %}
+<h2>Employees</h2>
+<style>
+    table, th, td {
+      border-style:solid;
+      border-color: #000202;
+    }
+</style>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Country</th>
+        <th>City</th>
+        <th>Company</th>
+        <th>email</th>
+        <th>phone</th>
+    </tr>
+        {% for e in employees %}
+    <tr>
+        <td>{{ e.name}} {{ e.surname }}</td>
+        <td>{{ e.country.country }}</td>
+        <td>{{ e.city.city }}</td>
+        <td>{{ e.company.name }}</td>
+        <td>{{ e.email }}</td>
+        <td>{{ e.phone }}</td>
+        <td><a href="{% url 'add_vacancy_core' e.id %}">Add vacancy</a></td>
+        {% endfor %}
+
+    </tr>
+</table>
+{% endblock content %}

@@ -23,21 +23,25 @@
         <th>work_format</th>
         <th>salary</th>
     </tr>
+    {% for u in users %}
     <tr>
-        {% for u in users %}
-        <td>{{ u.photo }}</td>
+        <td>
+            <img src="{{ u.photo.url }}">
+        </td>
         <td>{{ u.name }}</td>
         <td>{{ u.surname }}</td>
         <td>{{ u.age }}</td>
         <td>{{ u.experience_description }}</td>
-        <td>{{ u.resume }}</td>
+        <td>
+            <a href= "{{ u.resume.url }}"> Resume download </a>
+        </td>
         <td>{{ u.work_experience }}</td>
-        <td>{{ u.status }}</td>
-        <td>{{ u.design_format }}</td>
-        <td>{{ u.competence }}</td>
-        <td>{{ u.work_format }}</td>
-        <td>{{ u.min_salary }} - {{ u.max_salary }}</td>
-        {% endfor %}
+        <td>{{ u.status.status }}</td>
+        <td>{{ u.employment_formats.employment_format }}</td>
+        <td>{{ u.competence.competence }}</td>
+        <td>{{ u.work_format.work_format }}</td>
+        <td>{{ u.salary_min }} - {{ u.salary_max }}</td>
     </tr>
+    {% endfor %}
 </table>
 {% endblock content %}
