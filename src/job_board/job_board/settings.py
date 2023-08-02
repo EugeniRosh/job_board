@@ -141,3 +141,29 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR.parents[3], 'media', 'job_board')
 
 MEDIA_URL = '/media/'
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "console_formatter": {
+            "format": "{asctime} - {levelname} - {name} - {funcName}:{lineno} - {message}",
+            "style": "{",
+        }
+    },
+    "handlers": {
+        "console_handler": {
+            "class": "logging.StreamHandler",
+            "level": os.environ['LOGGING_LEVEL'],
+            "formatter": "console_formatter",
+        }
+    },
+    "loggers": {
+        "root": {"level": os.environ['LOGGING_LEVEL'], "handlers": ["console_handler"]},
+        "django": {
+            "level": os.environ['LOGGING_LEVEL'],
+            "handlers": ["console_handler"],
+        },
+        "PIL": {"level": "WARNING", "handlers": ["console_handler"]},
+    },
+}
