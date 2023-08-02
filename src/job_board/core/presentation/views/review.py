@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import logging
 from typing import TYPE_CHECKING
 
 from core.bussiness_logic.dto import CompanyReviewDTO
@@ -13,19 +14,26 @@ if TYPE_CHECKING:
     from django.core.handlers.wsgi import WSGIRequest
     from django.http.response import HttpResponse
 
+logger = logging.getLogger(__name__)
+
 
 @require_http_methods(["GET", "POST"])
 def add_review_company_core_controller(
     request: WSGIRequest, company_id: int
 ) -> HttpResponse:
-    if request.POST:
-        company_form = CompanyReviewForm(data=request.POST)
-        if company_form.is_valid():
-            review = converter_data_ftom_dto(
-                dto=CompanyReviewDTO, data=company_form.cleaned_data
-            )
-            add_review(review=review, company_id=company_id)
+    try:
+        if request.POST:
+            company_form = CompanyReviewForm(data=request.POST)
+            if company_form.is_valid():
+                review = converter_data_ftom_dto(
+                    dto=CompanyReviewDTO, data=company_form.cleaned_data
+                )
+                add_review(review=review, company_id=company_id)
+                logger.info("add new company review")
 
-    form = CompanyReviewForm()
-    context = {"title": "Add review", "form": form}
-    return render(request, "core/add_review_company_core.html", context=context)
+        form = CompanyReviewForm()
+        context = {"title": "Add review", "form": form}
+        return render(request, "core/add_review_company_core.html", context=context)
+
+    except Exception as err:
+        logger.critical(err)
