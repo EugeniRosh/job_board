@@ -167,3 +167,5 @@ LOGGING = {
         "PIL": {"level": "WARNING", "handlers": ["console_handler"]},
     },
 }
+
+CONFIRMATION_CODE_LIFETIME = 3600
