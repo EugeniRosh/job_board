@@ -1,4 +1,3 @@
-from django.core import validators
 from django.db import models
 
 from .base_model import BaseModel
@@ -19,12 +18,8 @@ class Vacancy(BaseModel):
     employment_formats = models.ForeignKey(
         to="EmploymentFormats", related_name="vacancy", on_delete=models.CASCADE
     )
-    salary_min = models.IntegerField(
-        validators=[validators.MinValueValidator(limit_value=0)]
-    )
-    salary_max = models.IntegerField(
-        validators=[validators.MinValueValidator(limit_value=0)]
-    )
+    salary_min = models.PositiveIntegerField(null=True)
+    salary_max = models.PositiveIntegerField(null=True)
     tag = models.ManyToManyField(to="Tags", through="VacancyTags")
     country = models.ManyToManyField(to="Countries", through="VacancyCountries")
 
