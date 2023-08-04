@@ -1,5 +1,6 @@
 from .company import CompanyDTO
 from .employee import EmployeeDTO
+from .registration import RegistrationDTO
 from .responses import ResponsesDTO
 from .review import CompanyReviewDTO
 from .user import UserDTO
@@ -13,4 +14,5 @@ __all__ = [
     "EmployeeDTO",
     "SearchVacancyDTO",
     "ResponsesDTO",
+    "RegistrationDTO",
 ]
