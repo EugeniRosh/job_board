@@ -7,7 +7,7 @@ from django import forms
 
 
 class CompanyForm(forms.Form):
-    name = forms.CharField(label='Company name', max_length=100, strip=True)
+    company_name = forms.CharField(label='Company name', max_length=100, strip=True)
     founding_year = forms.IntegerField(label='Founding year')
     logo = forms.ImageField(
         label='Logo',
@@ -19,7 +19,6 @@ class CompanyForm(forms.Form):
     description = forms.CharField(
         label='Description', widget=forms.Textarea, strip=True
     )
-    email = forms.EmailField(label='Email', required=False)
     phone = forms.CharField(label='Phone', max_length=20, strip=True)
     linkedin = forms.CharField(label='Linkedin', required=False, strip=True)
     instagram = forms.CharField(label='Instagram', required=False, strip=True)
@@ -31,8 +30,7 @@ class CompanyForm(forms.Form):
         strip=True,
         validators=[ValidatorMaxNumberValue(max_count=4)],
     )
-    min_staff = forms.IntegerField(label='Min_staff', min_value=1)
-    max_staff = forms.IntegerField(label='Max_staff', min_value=1)
+    staff_number = forms.IntegerField(label='Staff number', min_value=1)
     country = forms.CharField(label='Country', max_length=100, strip=True)
     city = forms.CharField(label='City', max_length=100, strip=True)
     street = forms.CharField(label='Street', max_length=100, strip=True)
