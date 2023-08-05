@@ -5,6 +5,8 @@ from .base_model import BaseModel
 
 
 class Employees(BaseModel):
+    name = models.CharField(max_length=50, blank=True)
+    surname = models.CharField(max_length=50, blank=True)
     country = models.ForeignKey(
         to="Countries", related_name="employees", on_delete=models.CASCADE, null=True
     )
