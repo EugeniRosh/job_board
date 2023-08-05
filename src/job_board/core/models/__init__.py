@@ -5,6 +5,7 @@ from .companies import Companies
 from .companies_business_lines import CompaniesBusinessLines
 from .competencies import Competencies
 from .countries import Countries
+from .email_confirmation_codes import EmailConfirmationCodes
 from .employees import Employees
 from .employees_positions import EmployeesPositions
 from .employment_format import EmploymentFormats
@@ -12,12 +13,11 @@ from .genders import Genders
 from .language_skills import LanguageSkills
 from .languages import Languages
 from .positions import Positions
-from .profiles import Profiles
 from .response_statuses import ResponseStatuses
 from .responses import Responses
 from .reviews import Reviews
+from .reviews_score import ReviewsScore
 from .skills import Skills
-from .staff_number import StaffNumber
 from .tags import Tags
 from .user_language_skills import UsersLanguageSkills
 from .user_statuses import UserStatuses
@@ -40,12 +40,10 @@ __all__ = [
     "Countries",
     "Cities",
     "Genders",
-    "Profiles",
     "Users",
     "UsersLanguageSkills",
     "UsersTags",
     "Addresses",
-    "StaffNumber",
     "Companies",
     "BusinessLines",
     "CompaniesBusinessLines",
@@ -58,4 +56,6 @@ __all__ = [
     "VacancyCountries",
     "ResponseStatuses",
     "Responses",
+    "EmailConfirmationCodes",
+    "ReviewsScore",
 ]
