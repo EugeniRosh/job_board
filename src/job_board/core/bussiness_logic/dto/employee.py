@@ -7,7 +7,6 @@ from django.core.files.uploadedfile import InMemoryUploadedFile
 class EmployeeDTO:
     name: str | None
     surname: str | None
-    login: str | None
     photo: InMemoryUploadedFile | None
     country: str | None
     city: str | None
