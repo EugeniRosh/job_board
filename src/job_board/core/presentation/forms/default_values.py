@@ -26,3 +26,5 @@ GENDERS = [(gender.gender, gender.gender) for gender in Genders.objects.all()]
 STATUS_JOBRESPONSE = [
     (status.status, status.status) for status in ResponseStatuses.objects.all()
 ]
+
+USER_ROLES = [("candidate", "candidate"), ("company", "company")]
