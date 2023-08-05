@@ -13,10 +13,14 @@
         <a href='{% url "add_company_core" %}'>Add Company</a>
         <a href='{% url "profile_core" %}'>Users</a>
         <a href='{% url "add_profile_core" %}'>Add Users</a>
-        <li><a href='{% url "registration" %}'>Sign up</a> | <a href='#'>Sign ip</a></li>
+        {% if user.is_aunthenticate %}
+            <li><a href='#'>Profile</a> | <a href='#'>Logout</a></li>
+        {% else %}
+            <li><a href='{% url "registration" %}'>Sign up</a> | <a href='#'>Sign in</a></li>
+        {% endif %}
         {% endblock mainmanu %}
 
-        {% block content %}
+        {% block content %} 
         {% endblock content %}
     </body>
 </html>
