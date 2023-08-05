@@ -14,4 +14,4 @@ class EmailConfirmationCodes(BaseModel):
     expiration = models.PositiveIntegerField()
 
     class Meta:
-        db_table = "emailcondirmationcodes"
+        db_table = "email_condirmation_codes"
