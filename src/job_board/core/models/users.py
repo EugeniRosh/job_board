@@ -5,6 +5,8 @@ from .base_model import BaseModel
 
 
 class Users(BaseModel):
+    name = models.CharField(max_length=50, blank=True)
+    surname = models.CharField(max_length=50, blank=True)
     age = models.PositiveSmallIntegerField(null=True)
     work_experience = models.PositiveIntegerField(null=True)
     resume = models.FileField(upload_to="users/resume/", blank=True)
