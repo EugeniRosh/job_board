@@ -71,16 +71,11 @@ class UserForm(forms.Form):
         strip=True,
         validators=[ValidatorMaxNumberValue(max_count=5)],
     )
-    email = forms.EmailField(label="Email", max_length=100, required=False)
     phone = forms.CharField(label="Phone", max_length=20, strip=True, required=False)
     linkedin = forms.CharField(
         label="linkedin", max_length=150, required=False, strip=True
     )
     github = forms.CharField(label="github", max_length=150, required=False, strip=True)
-    password = forms.CharField(
-        label="password", max_length=150, strip=True, required=False
-    )
-    login = forms.CharField(label="login", max_length=30, strip=True, required=False)
     country = forms.CharField(
         label="Country", max_length=20, strip=True, required=False
     )
