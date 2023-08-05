@@ -8,6 +8,7 @@ from .default_values import (
     USER_STATUS,
 )
 from .employees import EmployeesForm
+from .registration import RegistrationForm
 from .review import CompanyReviewForm
 from .user import UserForm
 from .vacancy import SearchVacancyForm, VacancyForm
@@ -27,4 +28,5 @@ __all__ = [
     "STATUS_JOBRESPONSE",
     "EmployeesForm",
     "SearchVacancyForm",
+    "RegistrationForm",
 ]
